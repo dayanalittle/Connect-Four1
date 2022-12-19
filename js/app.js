@@ -1,7 +1,7 @@
 
 
 
-// Create Board  6 by 7 
+// Create Board  6 by 7
 // Players Chooses preferred color 
 // Needs a alternating  turn function 
 // alert function if player pieces reach the top of board 
@@ -11,13 +11,7 @@
 // check vertically horizontally and diagonality for winner 
 // Drop the chips at end of game (for winner)
 // Algorithm that accounts  for winner similar to TTT
-// Reset game functiin
-
-
-
-
-
-
+// Reset game button
 
 /*-------------------------------- Constants --------------------------------*/
 
