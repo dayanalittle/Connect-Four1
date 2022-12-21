@@ -173,38 +173,63 @@ function updateBoard() {
 
 
 
-function updateMessage() {
-if (winner === false && tie === false) {
-    messageEl.textContent = ''
-
-}
-
-}
-
-
+// function updateMessage() 
 
 
 
 function handleClick(evt) {
     let index = 0;
+    let index2 = 0
+    let subtractions = 0
     
-    for(let i = 0; i < circleEls.length; i++){
+    //***CONVERTING 1D INDEX TO 2D INDEX */
+    for(let i = 0; i < circleEls.length; i++){ 
         if(evt.target.id === circleEls[i].id){
-            index = i
+            index = i //index in the 1d array
+            let tileValue = index + 1 // tile length and index dont match, add 1
+            while(tileValue > 7){ 
+                tileValue -= 7
+                subtractions += 1
+            }
+            
+            board = [
+                [null,null,null,null,null,null,null],
+                [null,null,null,null,null,null,null],
+                [null,null,null,null,null,null,null],
+                [null,null,null,null,null,null,null],
+                [null,null,null,null,null,null,null],
+                [null,null,null,null,null,null,null],
+            ]
+
+            index2 = tileValue - 1 //converting length back to index
+            
+            console.log(board)
             break;
         }
     }
 
-    if(board[index] === null){
-        if(turn === 1){
+    
+
+//**HANDLING THE DROPPING */
+    for(let i = board.length - 1; i > subtractions; i-- ){
+        if(board[i][index2] === null){
+            console.log(board.length, index2)
             evt.target.style.backgroundColor = 'red'
-        }else{
-            evt.target.style.backgroundColor = 'blue'
         }
     }
+
+
+
+    // if(board[subtractions][index2] === null){
+    //     if(turn === 1){
+    //         evt.target.style.backgroundColor = 'red'
+    //     }else{
+    //         evt.target.style.backgroundColor = 'blue'
+    //     }
+    // }
     
     console.log(index)
-    board[index] = turn
+    board[subtractions][index2] = turn
     
     if(turn === 1){
         turn = 0
