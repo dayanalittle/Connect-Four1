@@ -1,10 +1,11 @@
 body {
-    background-color: whitesmoke;
-    font-family:sans-serif;
-    margin: 0;
-    height: 100vh;
+    align-items: center;
+    background: green;
     display: flex;
     flex-direction: column;
+    font-family: sans-serif;
+    padding: 25px;
+    width: 100%;
 }
 section.board {
     display: grid;
@@ -21,3 +22,42 @@ div {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#resetBtn {
+    background-color: fff;
+    border-radius: 5px;
+    border: none;
+    color: black;
+    cursor: pointer;
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 15px 30px;
+    text-transform: uppercase;
+  }
+
+  #resetBtn:hover {
+    background-color: green;
+  }

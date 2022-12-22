@@ -35,13 +35,13 @@ const winningCombos = [
     [16, 17, 18, 19],
     [23, 24, 25, 26],
     [30, 31, 32, 33],
-    [37, 38 , 39, 40],
+    [37, 38, 39, 40],
     [3, 4, 5, 6],
     [10, 11, 12, 13],
     [17, 18, 19, 20],
     [24, 25, 26, 27],
     [31, 32, 33, 34],
-    [38, 39, 40, 41],   
+    [38, 39, 40, 41],
     [0, 7, 14, 21],
     [1, 8, 15, 22],
     [2, 9, 16, 23],
@@ -87,34 +87,44 @@ const winningCombos = [
     [13, 19, 25, 31],
     [19, 25, 31, 37],
     [20, 26, 32, 38]
- ]
-    
- 
+]
 
- 
+
+
+
 
 
 
 
 /*---------------------------- Variables (state) ----------------------------*/
 
-let board 
-let turn 
-let winner 
+let board
+let turn
+let winner
 let tie
- 
+
 
 
 /*------------------------ Cached Element References ------------------------*/
 
 const circleEls = document.querySelectorAll('.cir')
 const messageEl = document.getElementById('message')
-
+const resetBtnEl = document.querySelector('#resetBtn')
 
 
 
 
 /*----------------------------- Event Listeners -----------------------------*/
+
+resetBtnEl.addEventListener('click', init)
+
+for (let i = 0; i < circleEls.length; i++) {
+    circleEls[i].addEventListener('click', (event) => {
+        handleClick(event)
+    })
+}
+
+
 
 
 
@@ -125,30 +135,25 @@ init()
 
 function init() {
     board = [
-            [null,null,null,null,null,null,null],
-            [null,null,null,null,null,null,null],
-            [null,null,null,null,null,null,null],
-            [null,null,null,null,null,null,null],
-            [null,null,null,null,null,null,null],
-            [null,null,null,null,null,null,null],
-        ]
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+    ]
     turn = 1
     winner = false
     tie = false
-
-    for(let i = 0; i < circleEls.length; i++){
-        circleEls[i].addEventListener('click', (event) => {
-            handleClick(event)
-        })
-    }
-
     render()
-    
+
 }
 
 
 
 function render() {
+    updateBoard()
+   
 
 }
 
@@ -159,21 +164,34 @@ function render() {
 function updateBoard() {
     board.forEach((element, idx) => {
         if (element === 1) {
-            circleEls[idx].textContent = "Player 1"
+            circleEls[idx].textContent = "Player One"
         } else if (element === -1) {
-            circleEls[idx].textContent = "Player 2"
+            circleEls[idx].textContent = "Player Two"
         } else {
             circleEls[idx].textContent = ""
         }
     })
 }
-    
+
+
+// function updateMessage()
+// if (winner === false && tie === false) {
+
+//     if (turn === 1) {
+//         messageEl.textContent = "Player One" + " turn"
+//     } else {
+//         messageEl.textContent = "Player Two" + " turn"
+//     }
+
+// } else if (winner === false && tie === true) {
+//     messageEl.textContent = "Yall's Tied"
+// } else {
+//     messageEl.textContent = "Winner,Winner, Chicken Dinner!"
+
+// }
 
 
 
-
-
-// function updateMessage() 
 
 
 
@@ -181,38 +199,38 @@ function handleClick(evt) {
     let index = 0;
     let index2 = 0
     let subtractions = 0
-    
+
     //***CONVERTING 1D INDEX TO 2D INDEX */
-    for(let i = 0; i < circleEls.length; i++){ 
-        if(evt.target.id === circleEls[i].id){
+    for (let i = 0; i < circleEls.length; i++) {
+        if (evt.target.id === circleEls[i].id) {
             index = i //index in the 1d array
             let tileValue = index + 1 // tile length and index dont match, add 1
-            while(tileValue > 7){ 
+            while (tileValue > 7) {
                 tileValue -= 7
                 subtractions += 1
             }
-            
+
             board = [
-                [null,null,null,null,null,null,null],
-                [null,null,null,null,null,null,null],
-                [null,null,null,null,null,null,null],
-                [null,null,null,null,null,null,null],
-                [null,null,null,null,null,null,null],
-                [null,null,null,null,null,null,null],
+                [null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null],
             ]
 
             index2 = tileValue - 1 //converting length back to index
-            
+
             console.log(board)
             break;
         }
     }
 
-    
 
-//**HANDLING THE DROPPING */
-    for(let i = board.length - 1; i > subtractions; i-- ){
-        if(board[i][index2] === null){
+
+    //**HANDLING THE DROPPING */
+    for (let i = board.length - 1; i > subtractions; i--) {
+        if (board[i][index2] === null) {
             console.log(board.length, index2)
             evt.target.style.backgroundColor = 'red'
         }
@@ -220,31 +238,34 @@ function handleClick(evt) {
 
 
 
-    // if(board[subtractions][index2] === null){
-    //     if(turn === 1){
-    //         evt.target.style.backgroundColor = 'red'
-    //     }else{
-    //         evt.target.style.backgroundColor = 'blue'
-    //     }
-    // }
-    
-    console.log(index)
+    if (board[subtractions][index2] === null) {
+        if (turn === 1) {
+            evt.target.style.backgroundColor = 'red'
+        } else {
+            evt.target.style.backgroundColor = 'blue'
+        }
+    }
+
+
     board[subtractions][index2] = turn
-    
-    if(turn === 1){
+
+    if (turn === 1) {
         turn = 0
-    }else{
+    } else {
         turn = 1
     }
-    
-    console.log(board)
 
-
-
-
+    placeChip(circleEls)
+    render()
 }
 
-// placeChip(cirIdx)
+
+
+function placeChip(index) {
+    board[index] = turn
+}
+
+
 // checkForTie()
 // checkForWinner()
 // switchPlayerTurn()
