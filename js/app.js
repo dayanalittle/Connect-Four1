@@ -12,7 +12,7 @@ check vertically horizontally and diagonality for winner
 Drop the chips at end of game (for winner)
 Algorithm that accounts  for winner similar to TTT
 Reset game button
-// make fabicon 
+make fabicon 
 */
 
 /*-------------------------------- Constants --------------------------------*/
@@ -242,7 +242,7 @@ function handleClick(evt) {
         if (turn === 1) {
             evt.target.style.backgroundColor = 'red'
         } else {
-            evt.target.style.backgroundColor = 'yellow'
+            evt.target.style.backgroundColor = 'blue'
         }
     }
 
