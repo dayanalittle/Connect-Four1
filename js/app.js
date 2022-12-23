@@ -1,20 +1,3 @@
-
-
-
-/*Create Board  6 by 7
-Players Chooses preferred color 
-Needs a alternating  turn function 
-alert function if player pieces reach the top of board 
-Alert is spot is already taken 
-Check for winner function 
-// Needs winning combinations list
-check vertically horizontally and diagonality for winner 
-Drop the chips at end of game (for winner)
-Algorithm that accounts  for winner similar to TTT
-Reset game button
-make fabicon 
-*/
-
 /*-------------------------------- Constants --------------------------------*/
 
 const winningCombos = [
@@ -88,14 +71,6 @@ const winningCombos = [
     [19, 25, 31, 37],
     [20, 26, 32, 38]
 ]
-
-
-
-
-
-
-
-
 /*---------------------------- Variables (state) ----------------------------*/
 
 let board
@@ -104,14 +79,11 @@ let winner
 let tie
 
 
-
 /*------------------------ Cached Element References ------------------------*/
 
 const circleEls = document.querySelectorAll('.cir')
 const messageEl = document.getElementById('message')
 const resetBtnEl = document.querySelector('#resetBtn')
-
-
 
 
 /*----------------------------- Event Listeners -----------------------------*/
@@ -123,10 +95,6 @@ for (let i = 0; i < circleEls.length; i++) {
         handleClick(event)
     })
 }
-
-
-
-
 
 /*-------------------------------- Functions --------------------------------*/
 
@@ -179,15 +147,15 @@ function updateMessage() {
     if (winner === false && tie === false) {
 
         if (turn === 1) {
-            messageEl.textContent = "Player 1" + " Turn"
+            messageEl.textContent = "PLAYER 1" + " TURN"
         } else {
-            messageEl.textContent = "Player 2" + " Turn"
+            messageEl.textContent = "PLAYER 2" + " TURN"
         }
 
     } else if (winner === false && tie === true) {
-        messageEl.textContent = "Yall's Tied"
+        messageEl.textContent = "GAME TIED"
     } else {
-        messageEl.textContent = "Winner!"
+        messageEl.textContent = "WINNER!"
 
     }
 

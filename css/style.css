@@ -3,10 +3,22 @@ body {
     background: green;
     display: flex;
     flex-direction: column;
-    font-family: sans-serif;
+    font-family: 'Rubik Glitch', cursive;
     padding: 25px;
     width: 100%;
 }
+
+h1 {
+    font-size: 65px;
+    
+}
+
+h2{
+    font-size: 40px;
+    margin 1px;
+}
+
+
 section.board {
     display: grid;
     height: 540px;
@@ -27,31 +39,12 @@ section.board {
     margin: 5px;
     border: 5px solid navy;
 
-
-
-
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #resetBtn {
-    background-color: fff;
+    background-color: red;
     border-radius: 5px;
-    border: none;
+    border: 5px solid black;
     color: black;
     cursor: pointer;
     display: block;
@@ -59,9 +52,15 @@ section.board {
     font-weight: bold;
     padding: 15px 30px;
     text-transform: uppercase;
+    margin: 20px;
+    color: yellow;
+    font-family: 'Chivo Mono', monospace;
     
   }
 
   #resetBtn:hover {
-    background-color: green;
+    background-color: yellow;
+    border: 5px solid black;
+    color:red;
+    
   }
