@@ -153,28 +153,23 @@ function init() {
 
 function render() {
     updateBoard()
-   updateMessage()
+    updateMessage()
 
 }
 
 
 
-
-
 function updateBoard() {
-    console.log(board)
-    board.forEach((element, idx) => {
-        if (element === 1) {
-            console.log(idx, 'ONE')
+    board.forEach((currValue, idx) => {
+        if (currValue === 1) {
             messageEl.textContent = "Player One"
-            console.log(idx)
             circleEls[idx].style.backgroundColor = 'red'
-        } else if (element === -1) {
-            console.log(idx, 'TWO')
+        } else if (currValue === -1) {
             messageEl.textContent = "Player Two"
             circleEls[idx].style.backgroundColor = 'yellow'
         } else {
             messageEl.textContent = ""
+            circleEls[idx].style.backgroundColor = 'white'
         }
     })
 }
@@ -184,15 +179,15 @@ function updateMessage() {
     if (winner === false && tie === false) {
 
         if (turn === 1) {
-            messageEl.textContent = "Player 1" + " turn"
+            messageEl.textContent = "Player 1" + " Turn"
         } else {
-            messageEl.textContent = "Player 2" + " turn"
+            messageEl.textContent = "Player 2" + " Turn"
         }
 
     } else if (winner === false && tie === true) {
         messageEl.textContent = "Yall's Tied"
     } else {
-        messageEl.textContent = "Winner,Winner, Chicken Dinner!"
+        messageEl.textContent = "Winner!"
 
     }
 
@@ -200,32 +195,13 @@ function updateMessage() {
 }
 
 
-
-
-
-
 function handleClick(evt) {
-   
-  
 
-   
-    
-
-
-
-    
-
-
-  
-
-    turn *= -1
-
-
-    if(winner === false && tie === false){
+    if (winner === false && tie === false) {
         placeChip(evt)
     }
-    checkForTie() 
-    checkForWinner() 
+    checkForTie()
+    checkForWinner()
     switchPlayerTurn()
     render()
 }
@@ -233,37 +209,22 @@ function handleClick(evt) {
 
 
 function placeChip(evt) {
-    let index = parseInt(evt.target.id.replace('cir', ''));
-
-
-    //***CONVERTING 1D INDEX TO 2D INDEX */
-    // for (let i = 0; i < circleEls.length; i++) {
-        //     if (evt.target.id === circleEls[i].id) {
-            //         index = i //index in the 1d array
-            //         let tileValue = index + 1 // tile length and index dont match, add 1
-            //         while (tileValue > 7) {
-                //             tileValue -= 7
-                //             subtractions += 1
-                //         }
-    //         index2 = tileValue - 1 //converting length back to index
-    //         break;
-    //     }
-    // }
-    
-    
-    while(index > 7){
-        index -= 7
+    let column = parseInt(evt.target.id.replace('cir', ''));
+    while (column > 7) {
+        column -= 7
     }
-    
-//     //**HANDLING THE DROPPING */
+
+
     let tiles = 35
-    console.log(index + tiles)
-   
-    while(board[index + tiles] !== null){
-        tiles -= 7
+
+    for (let i = tiles; i >= 0; i -= 7) {
+        if (board[column + i] === null) {
+            board[column + i] = turn
+            break;
+        }
     }
 
-    board[index + tiles] = turn
+
 }
 
 function checkForTie() {
@@ -283,9 +244,9 @@ function checkForWinner() {
             total += board[element]
         })
         total = Math.abs(total)
-       
+
         if (total === 4) {
-            console.log('WE HAVE A WINNER')
+
             winner = true
         }
     }
@@ -297,5 +258,6 @@ function switchPlayerTurn() {
         return;
     }
 
-    turn *= 1
+    turn *= -1
 }
+
