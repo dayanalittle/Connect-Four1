@@ -183,9 +183,9 @@ function placeChip(evt) {
     }
 
 
-    let tiles = 35
+    let circles = 35
 
-    for (let i = tiles; i >= 0; i -= 7) {
+    for (let i = circles; i >= 0; i -= 7) {
         if (board[column + i] === null) {
             board[column + i] = turn
             break;
