@@ -135,12 +135,12 @@ init()
 
 function init() {
     board = [
-        [null, null, null, null, null, null, null],
-        [null, null, null, null, null, null, null],
-        [null, null, null, null, null, null, null],
-        [null, null, null, null, null, null, null],
-        [null, null, null, null, null, null, null],
-        [null, null, null, null, null, null, null],
+        null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null,
     ]
     turn = 1
     winner = false
@@ -153,7 +153,7 @@ function init() {
 
 function render() {
     updateBoard()
-   
+   updateMessage()
 
 }
 
@@ -162,33 +162,42 @@ function render() {
 
 
 function updateBoard() {
+    console.log(board)
     board.forEach((element, idx) => {
         if (element === 1) {
-            circleEls[idx].textContent = "Player One"
+            console.log(idx, 'ONE')
+            messageEl.textContent = "Player One"
+            console.log(idx)
+            circleEls[idx].style.backgroundColor = 'red'
         } else if (element === -1) {
-            circleEls[idx].textContent = "Player Two"
+            console.log(idx, 'TWO')
+            messageEl.textContent = "Player Two"
+            circleEls[idx].style.backgroundColor = 'yellow'
         } else {
-            circleEls[idx].textContent = ""
+            messageEl.textContent = ""
         }
     })
 }
 
 
-// function updateMessage()
-// if (winner === false && tie === false) {
+function updateMessage() {
+    if (winner === false && tie === false) {
 
-//     if (turn === 1) {
-//         messageEl.textContent = "Player One" + " turn"
-//     } else {
-//         messageEl.textContent = "Player Two" + " turn"
-//     }
+        if (turn === 1) {
+            messageEl.textContent = "Player 1" + " turn"
+        } else {
+            messageEl.textContent = "Player 2" + " turn"
+        }
 
-// } else if (winner === false && tie === true) {
-//     messageEl.textContent = "Yall's Tied"
-// } else {
-//     messageEl.textContent = "Winner,Winner, Chicken Dinner!"
+    } else if (winner === false && tie === true) {
+        messageEl.textContent = "Yall's Tied"
+    } else {
+        messageEl.textContent = "Winner,Winner, Chicken Dinner!"
 
-// }
+    }
+
+
+}
 
 
 
@@ -196,91 +205,97 @@ function updateBoard() {
 
 
 function handleClick(evt) {
-    let index = 0;
-    let index2 = 0
-    let subtractions = 0
+   
+  
 
-    //***CONVERTING 1D INDEX TO 2D INDEX */
-    for (let i = 0; i < circleEls.length; i++) {
-        if (evt.target.id === circleEls[i].id) {
-            index = i //index in the 1d array
-            let tileValue = index + 1 // tile length and index dont match, add 1
-            while (tileValue > 7) {
-                tileValue -= 7
-                subtractions += 1
-            }
+   
+    
 
-            board = [
-                [null, null, null, null, null, null, null],
-                [null, null, null, null, null, null, null],
-                [null, null, null, null, null, null, null],
-                [null, null, null, null, null, null, null],
-                [null, null, null, null, null, null, null],
-                [null, null, null, null, null, null, null],
-            ]
 
-            index2 = tileValue - 1 //converting length back to index
 
-            console.log(board)
-            break;
-        }
+    
+
+
+  
+
+    turn *= -1
+
+
+    if(winner === false && tie === false){
+        placeChip(evt)
     }
-
-
-
-    //**HANDLING THE DROPPING */
-    for (let i = board.length - 1; i > subtractions; i--) {
-        if (board[i][index2] === null) {
-            console.log(board.length, index2)
-            evt.target.style.backgroundColor = 'red'
-        }
-    }
-
-
-
-    if (board[subtractions][index2] === null) {
-        if (turn === 1) {
-            evt.target.style.backgroundColor = 'red'
-        } else {
-            evt.target.style.backgroundColor = 'blue'
-        }
-    }
-
-
-    board[subtractions][index2] = turn
-
-    if (turn === 1) {
-        turn = 0
-    } else {
-        turn = 1
-    }
-
-    placeChip(circleEls)
+    checkForTie() 
+    checkForWinner() 
+    switchPlayerTurn()
     render()
 }
 
 
 
-function placeChip(index) {
-    board[index] = turn
+function placeChip(evt) {
+    let index = parseInt(evt.target.id.replace('cir', ''));
+
+
+    //***CONVERTING 1D INDEX TO 2D INDEX */
+    // for (let i = 0; i < circleEls.length; i++) {
+        //     if (evt.target.id === circleEls[i].id) {
+            //         index = i //index in the 1d array
+            //         let tileValue = index + 1 // tile length and index dont match, add 1
+            //         while (tileValue > 7) {
+                //             tileValue -= 7
+                //             subtractions += 1
+                //         }
+    //         index2 = tileValue - 1 //converting length back to index
+    //         break;
+    //     }
+    // }
+    
+    
+    while(index > 7){
+        index -= 7
+    }
+    
+//     //**HANDLING THE DROPPING */
+    let tiles = 35
+    console.log(index + tiles)
+   
+    while(board[index + tiles] !== null){
+        tiles -= 7
+    }
+
+    board[index + tiles] = turn
+}
+
+function checkForTie() {
+    for (let i = 0; i < board.length; i++) {
+        if (board[i] === null) {
+            return;
+        }
+    }
+    tie = true
 }
 
 
-// checkForTie()
-// checkForWinner()
-// switchPlayerTurn()
-// render()
+function checkForWinner() {
+    for (let i = 0; i < winningCombos.length; i++) {
+        let total = 0
+        winningCombos[i].forEach(element => {
+            total += board[element]
+        })
+        total = Math.abs(total)
+       
+        if (total === 4) {
+            console.log('WE HAVE A WINNER')
+            winner = true
+        }
+    }
+}
 
 
-// function checkForTie() {
+function switchPlayerTurn() {
+    if (winner === true) {
+        return;
+    }
 
-// }
-
-
-// function checkForWinner() {
-
-// }
-
-// function switchPlayerTurn() {
-
-// }
+    turn *= 1
+}
