@@ -2,13 +2,13 @@
 
 ![](https://i.imgur.com/FJ8xj5K.png)
 
-Connect Four is a browser based game that accepts two players as opponents. In the game, players take turns choosing an index on the game board to place their chip, starting from the bottom row. Once a column is choosen, the chip will slot into the lowest spaces in each column.
+Connect Four is a browser based game that accepts two players as opponents. In the game, players take turns choosing an index on the game board to place their chip, starting from the bottom row. Once a column is chosen, the chip will slot into the lowest spaces in each column.
 
 
 ###### Hint: Something to keep in mind is that simply knowing the rules of Connect 4 will not guarantee you a win. You need to work on your strategy and technique in order to increase your chances of winning.
 
 - HOW TO PLAY:
-  - First, players decide who goes first by simplying clicking one of the circles (player 1 is red) 
+  - First, players decide who goes first by simply clicking one of the circles (player 1 is red) 
   - Players will alternate turns by placing their chip in a circle then letting the other player do the same
   - Players must CONNECT FOUR of the same colored chips in a row to win 
   - Only one chip can be played at a time 
@@ -47,7 +47,7 @@ Connect Four is a browser based game that accepts two players as opponents. In t
 
 - Create board in html
 - Style Board 6 by 7 (42 indexes)
-- Define varibles 
+- Define variables 
 - Store cached element references 
 - Define constants 
 - When the game is loaded it needs to be initialized
