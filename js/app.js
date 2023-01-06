@@ -84,7 +84,8 @@ let tie
 const circleEls = document.querySelectorAll('.cir')
 const messageEl = document.getElementById('message')
 const resetBtnEl = document.querySelector('#resetBtn')
-
+const tiedSound = new Audio('./assets/tied.wav')
+const winnerSound = new Audio('./assets/winner.mp3')
 
 /*----------------------------- Event Listeners -----------------------------*/
 
@@ -153,15 +154,16 @@ function updateMessage() {
         }
 
     } else if (winner === false && tie === true) {
-        messageEl.textContent = "GAME TIED"
+        tiedSound.play()
+        messageEl.textContent = "GAME TIED!"
     } else {
-        messageEl.textContent = "WINNER!"
+        winnerSound.play()
+        turn === 1 ? messageEl.textContent = "PLAYER 1 WINNER!" : messageEl.textContent = "PLAYER 2 WINNER!"
 
     }
 
 
 }
-
 
 function handleClick(evt) {
 
@@ -173,7 +175,6 @@ function handleClick(evt) {
     switchPlayerTurn()
     render()
 }
-
 
 
 function placeChip(evt) {

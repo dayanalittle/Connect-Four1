@@ -1,3 +1,7 @@
+
+
+
+
 body {
     align-items: center;
     background: green;
@@ -6,6 +10,11 @@ body {
     font-family: 'Rubik Glitch', cursive;
     padding: 25px;
     width: 100%;
+    height: 100%;
+    min-width: 1000px;
+    min-height: 1000px;
+    
+    
 }
 
 h1 {
@@ -29,6 +38,7 @@ section.board {
     display: flex;
     flex-wrap: wrap;
     border-radius: 50px;
+    
 }
 
 .cir {
@@ -64,3 +74,10 @@ section.board {
     color:red;
     
   }
+
+  /* #my-div {
+    max-width: 20%;
+    max-height: 20%;
+    margin: auto;
+
+  } */
