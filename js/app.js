@@ -158,7 +158,7 @@ function updateMessage() {
         messageEl.textContent = "GAME TIED!"
     } else {
         winnerSound.play()
-        turn === 1 ? messageEl.textContent = "PLAYER 1 WINNER!" : messageEl.textContent = "PLAYER 2 WINNER!"
+        turn === 1 ? messageEl.textContent = "PLAYER 1 WINS!" : messageEl.textContent = "PLAYER 2 WINS!"
 
     }
 
